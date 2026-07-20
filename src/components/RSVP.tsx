@@ -4,6 +4,9 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 
+const RSVP_EMAIL = "taty_ios@hotmail.com";
+const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${RSVP_EMAIL}`;
+
 type FormState = {
   name: string;
   email: string;
@@ -29,24 +32,55 @@ export function RSVP() {
     e.preventDefault();
     setStatus("submitting");
 
+    const attendanceLabel =
+      form.attendance === "yes"
+        ? "Estará presente"
+        : "Não poderá comparecer";
+
     try {
-      const response = await fetch("/api/rsvp", {
+      const response = await fetch(FORMSUBMIT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          presença: attendanceLabel,
+          _subject: `RSVP — ${form.name.trim()}`,
+          _replyto: form.email.trim(),
+          _template: "table",
+          _captcha: "false",
+        }),
       });
 
       const data = (await response.json().catch(() => null)) as {
+        success?: string | boolean;
+        message?: string;
         error?: string;
       } | null;
 
-      if (!response.ok) {
+      const detail = data?.error ?? data?.message ?? "";
+      const needsActivation =
+        typeof detail === "string" &&
+        detail.toLowerCase().includes("activation");
+
+      const succeeded =
+        response.ok &&
+        (data?.success === true || data?.success === "true") &&
+        !data?.error;
+
+      if (!succeeded) {
         setErrorMessage(
-          data?.error ??
-            "Não foi possível enviar agora. Tente novamente em alguns instantes.",
+          needsActivation
+            ? `Ative o formulário uma vez: abra o e-mail do FormSubmit em ${RSVP_EMAIL} (também na pasta de spam) e clique em “Activate Form”. Depois tente de novo.`
+            : detail ||
+                "Não foi possível enviar agora. Tente novamente em alguns instantes.",
         );
-        throw new Error(data?.error ?? "Não foi possível enviar");
+        throw new Error(detail || "Não foi possível enviar");
       }
+
       setStatus("success");
     } catch {
       setStatus("error");

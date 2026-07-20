@@ -24,9 +24,9 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 ### RSVP por e-mail
 
-As confirmações vão para **taty_ios@hotmail.com** via FormSubmit — sem variáveis de ambiente.
+As confirmações vão para **taty_ios@hotmail.com** via [FormSubmit](https://formsubmit.co/) (envio direto do navegador).
 
-Na **primeira** vez que alguém confirmar presença, o FormSubmit envia um e-mail de ativação para esse Hotmail. É preciso abrir e clicar no link uma vez; depois os RSVPs chegam normalmente.
+**Importante — ativação única:** na primeira tentativa, o FormSubmit manda um e-mail com o link **Activate Form** para `taty_ios@hotmail.com`. Sem clicar nesse link (verifique também a pasta de spam), as confirmações não chegam.
 
 ## Páginas
 
