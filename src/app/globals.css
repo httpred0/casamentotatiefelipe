@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #f7f3ee;
+  --cream-deep: #efe8de;
+  --sand: #e4d8c8;
+  --champagne: #c4b5a0;
+  --sage: #9aa68b;
+  --ink: #2a2724;
+  --ink-soft: #5c564f;
+  --ink-muted: #8a837a;
+  --line: rgba(42, 39, 36, 0.12);
+  --glow: rgba(196, 181, 160, 0.35);
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-sand: var(--sand);
+  --color-champagne: var(--champagne);
+  --color-sage: var(--sage);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+body {
+  background:
+    radial-gradient(120% 80% at 10% 0%, rgba(228, 216, 200, 0.45), transparent 55%),
+    radial-gradient(90% 60% at 100% 10%, rgba(154, 166, 139, 0.12), transparent 50%),
+    var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01" on, "kern" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--champagne) 55%, transparent);
+  color: var(--ink);
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* Shared section rhythm */
+.section {
+  scroll-margin-top: 7rem;
+  padding-block: 5.5rem;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 7.5rem;
+    padding-inline: 2.5rem;
+  }
+}
+
+.section-inner {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+}
+
+.section-inner--narrow {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 42rem;
+}
+
+.section-inner--medium {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 56rem;
+}
+
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  margin-top: 1.25rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.15rem, 4.6vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.section-lede {
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 768px) {
+  .section-lede {
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+}
+
+.section-body {
+  margin-top: 3.5rem;
+}
+
+.hairline {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.85rem 0;
+  color: var(--ink);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.35s ease;
+}
+
+.field:focus {
+  border-color: var(--ink);
+}
+
+.field::placeholder {
+  color: var(--ink-muted);
+}
+
+select.field {
+  cursor: pointer;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.img-reveal {
+  overflow: hidden;
+}
+
+.img-reveal img {
+  transform: scale(1.04);
+  transition: transform 1.4s var(--ease-out-expo);
+}
+
+.img-reveal:hover img {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .img-reveal img {
+    transform: none !important;
+  }
+}
