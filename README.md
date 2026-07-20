@@ -11,28 +11,22 @@ Layout editorial, com foco nas fotos e tipografia. Feito com Next.js, Tailwind C
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Lenis](https://lenis.darkroom.engineering/) (scroll suave)
-- [Resend](https://resend.com/) (confirmação de presença por e-mail)
+- [FormSubmit](https://formsubmit.co/) (confirmação de presença por e-mail)
 
 ## Começar
 
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
 Abra [http://localhost:3000](http://localhost:3000).
 
-### Variáveis de ambiente
+### RSVP por e-mail
 
-Copie `.env.example` para `.env.local` e preencha:
+As confirmações vão para **taty_ios@hotmail.com** via FormSubmit — sem variáveis de ambiente.
 
-| Variável | Descrição |
-| --- | --- |
-| `RESEND_API_KEY` | API key do [Resend](https://resend.com) |
-| `RSVP_FROM_EMAIL` | Remetente verificado no Resend (ex.: `Tatiane e Felipe <rsvp@seu-dominio.com>`) |
-
-Sem essas variáveis, o formulário de RSVP não envia o e-mail.
+Na **primeira** vez que alguém confirmar presença, o FormSubmit envia um e-mail de ativação para esse Hotmail. É preciso abrir e clicar no link uma vez; depois os RSVPs chegam normalmente.
 
 ## Páginas
 
@@ -60,4 +54,4 @@ npm run lint     # ESLint
 
 ## Deploy
 
-Compatível com [Vercel](https://vercel.com). Configure `RESEND_API_KEY` e `RSVP_FROM_EMAIL` nas variáveis de ambiente do projeto.
+Compatível com [Vercel](https://vercel.com). O RSVP não exige variáveis de ambiente.

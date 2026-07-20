@@ -21,6 +21,9 @@ export function RSVP() {
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
+  const [errorMessage, setErrorMessage] = useState(
+    "Não foi possível enviar agora. Tente novamente em alguns instantes.",
+  );
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -33,7 +36,17 @@ export function RSVP() {
         body: JSON.stringify(form),
       });
 
-      if (!response.ok) throw new Error("Não foi possível enviar");
+      const data = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        setErrorMessage(
+          data?.error ??
+            "Não foi possível enviar agora. Tente novamente em alguns instantes.",
+        );
+        throw new Error(data?.error ?? "Não foi possível enviar");
+      }
       setStatus("success");
     } catch {
       setStatus("error");
@@ -150,8 +163,7 @@ export function RSVP() {
                   </button>
                   {status === "error" && (
                     <p role="alert" className="text-center text-sm text-red-800">
-                      Não foi possível enviar agora. Tente novamente em alguns
-                      instantes.
+                      {errorMessage}
                     </p>
                   )}
                 </motion.form>

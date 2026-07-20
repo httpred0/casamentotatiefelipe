@@ -401,27 +401,9 @@ export const giftRegistries: Record<string, GiftRegistry> = {
     items: [
       {
         id: "livre-1",
-        name: "Presente simbólico",
-        description: "Um carinho discreto para o nosso começo.",
-        price: "R$ 100",
-      },
-      {
-        id: "livre-2",
-        name: "Presente especial",
-        description: "Uma contribuição generosa para o nosso capítulo.",
-        price: "R$ 250",
-      },
-      {
-        id: "livre-3",
-        name: "Presente generoso",
-        description: "Para ajudar nos planos do nosso novo lar juntos.",
-        price: "R$ 500",
-      },
-      {
-        id: "livre-4",
-        name: "Valor livre",
+        name: "Contribua com liberdade",
         description: "Escolha o valor que fizer sentido para você.",
-        price: "A definir",
+        mercadoPagoUrl: "https://link.mercadopago.com.br/casamentotatiefelipe",
       },
     ],
   },
