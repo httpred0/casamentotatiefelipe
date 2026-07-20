@@ -43,7 +43,7 @@ export const timeline = [
 export const faqs = [
   {
     q: "E a área infantil?",
-    a: "Pode sim levar crianças. Só lembramos que não teremos área infantil no local.",
+    a: "Infelizmente não tem área infantil no local.",
   },
   {
     q: "Há estacionamento?",
